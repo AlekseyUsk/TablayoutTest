@@ -1,14 +1,16 @@
 package com.bignerdranch.android.tablayouttest
 
- import androidx.appcompat.app.AppCompatActivity
- import android.os.Bundle
- import android.widget.Toast
- import com.bignerdranch.android.tablayouttest.databinding.ActivityMainBinding
- import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import com.bignerdranch.android.tablayouttest.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val fragmentsList =
+        listOf<Fragment>(Fragment1.newInstance(), Fragment2.newInstance(), Fragment3.newInstance())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //элемент который мы сдесь выбрали по позициям отчет с 0-1-2 и тд или по названию
-                Toast.makeText(
-                    this@MainActivity,
-                    "выбран элемент ${tab?.text} по позиции ${tab?.position}",
-                    Toast.LENGTH_SHORT
-                ).show()
+supportFragmentManager.beginTransaction().replace(R.id.placeHolder,fragmentsList[tab?.position!!]).commit()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -32,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 //элемент который мы перевыбрали еще раз
             }
-
         })
     }
 }
