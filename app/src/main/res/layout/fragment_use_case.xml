@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment1">
+    tools:context=".UseCaseFragment">
+
 
     <TextView
         android:gravity="center"
         android:textSize="70sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="1" />
+        android:text="3" />
 
 </FrameLayout>
