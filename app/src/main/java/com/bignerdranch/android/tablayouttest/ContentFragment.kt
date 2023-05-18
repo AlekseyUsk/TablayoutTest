@@ -28,18 +28,25 @@ class ContentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentContentBinding.inflate(inflater,container,false)
+        binding = FragmentContentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ViewPagerAdapter(requireActivity(), fragmentsList)
-        binding.viewPager.adapter = adapter
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, pos ->
-            tab.text = fragmentsListTitles[pos]
-        }.attach()
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.plant.observe(viewLifecycleOwner) {
+            binding.imageMain.setImageResource(it.imageId)
+
+            val adapter = ViewPagerAdapter(requireActivity(), fragmentsList)
+            binding.viewPager.adapter = adapter
+            TabLayoutMediator(binding.tabLayout, binding.viewPager)
+            { tab, pos ->
+                tab.text = fragmentsListTitles[pos]
+            }.attach()
+        }
     }
+
 
     companion object {
         @JvmStatic

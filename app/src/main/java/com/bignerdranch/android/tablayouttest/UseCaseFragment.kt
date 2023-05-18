@@ -24,6 +24,13 @@ class UseCaseFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.plant.observe(viewLifecycleOwner){
+            binding.textViewUseCase.text = it.useCase
+        }
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = UseCaseFragment()
